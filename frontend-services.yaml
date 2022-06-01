@@ -7,8 +7,8 @@ metadata:
   name: frontend-np
 spec:
   ports:
-  - name: 80-8000
-    port: 80
+  - name: 8001-8000
+    port: 8001
     protocol: TCP
     targetPort: 8000
   selector:
@@ -26,12 +26,10 @@ spec:
   rules:
   - http:
       paths:
-      - backend:
+      - path: /
+        pathType: Prefix
+        backend:
           service:
             name: frontend-np
             port:
-              number: 80
-        path: /
-        pathType: Exact
-status:
-  loadBalancer: {}
+              number: 8001
